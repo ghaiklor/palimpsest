@@ -1,1 +1,0 @@
-enum BlockType { empty }
