@@ -4,3 +4,6 @@ version: 0.0.0
 publish_to: none
 
 repository: https://github.com/ghaiklor/palimpsest
+
+environment:
+  sdk: 3.11.3
