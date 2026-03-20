@@ -15,6 +15,7 @@ class SectorPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     for (var index = 0; index < sector.cells.length; index++) {
+      final block = sector.cells[index];
       final width = blockSize;
       final height = blockSize;
       final left = (index % sector.columns) * width;
@@ -26,7 +27,7 @@ class SectorPainter extends CustomPainter {
         height - (blockGap * 2),
       );
 
-      final paint = Paint()..color = sector.cells[index].style.fillColor;
+      final paint = Paint()..color = block.style.fillColor;
 
       canvas.drawRect(rect, paint);
     }
