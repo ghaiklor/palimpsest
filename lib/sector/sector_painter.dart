@@ -3,14 +3,15 @@ import 'package:palimpsest/sector/sector.dart';
 
 class SectorPainter extends CustomPainter {
   final Sector sector;
+  final double blockSize;
 
-  const SectorPainter({required this.sector});
+  const SectorPainter({required this.sector, required this.blockSize});
 
   @override
   void paint(Canvas canvas, Size size) {
     for (var index = 0; index < sector.cells.length; index++) {
-      final width = 24.0;
-      final height = 24.0;
+      final width = blockSize;
+      final height = blockSize;
       final left = (index % sector.columns) * width;
       final top = (index ~/ sector.columns) * height;
       final rect = Rect.fromLTWH(left, top, width, height);
