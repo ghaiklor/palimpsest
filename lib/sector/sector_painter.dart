@@ -22,8 +22,8 @@ class SectorPainter extends CustomPainter {
       final rect = Rect.fromLTWH(
         left + blockGap,
         top + blockGap,
-        width - blockGap,
-        height - blockGap,
+        width - (blockGap * 2),
+        height - (blockGap * 2),
       );
 
       final paint = Paint()..color = sector.cells[index].style.fillColor;
