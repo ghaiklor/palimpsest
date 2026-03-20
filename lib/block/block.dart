@@ -3,11 +3,14 @@ import 'package:palimpsest/block/block_type.dart';
 
 class Block {
   final BlockType type;
-  final BlockStyle style;
 
-  const Block({required this.type, required this.style});
+  const Block({required this.type});
+
+  BlockStyle get style {
+    return BlockStyle.of(type);
+  }
 
   factory Block.empty() {
-    return Block(type: BlockType.empty, style: BlockStyle.of(BlockType.empty));
+    return Block(type: BlockType.empty);
   }
 }
