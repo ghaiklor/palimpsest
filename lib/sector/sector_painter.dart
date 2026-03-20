@@ -25,6 +25,38 @@ class SectorPainter extends CustomPainter {
       final paint = Paint()..color = block.style.fillColor;
 
       canvas.drawRect(rect, paint);
+
+      canvas.drawLine(
+        Offset(left, top),
+        Offset(left + width, top),
+        Paint()
+          ..color = CupertinoColors.white.withAlpha(120)
+          ..strokeWidth = 0.5,
+      );
+
+      canvas.drawLine(
+        Offset(left, top),
+        Offset(left, top + height),
+        Paint()
+          ..color = CupertinoColors.white.withAlpha(120)
+          ..strokeWidth = 0.5,
+      );
+
+      canvas.drawLine(
+        Offset(left + width, top),
+        Offset(left + width, top + height),
+        Paint()
+          ..color = CupertinoColors.black.withAlpha(160)
+          ..strokeWidth = 0.5,
+      );
+
+      canvas.drawLine(
+        Offset(left, top + height),
+        Offset(left + width, top + height),
+        Paint()
+          ..color = CupertinoColors.black.withAlpha(160)
+          ..strokeWidth = 0.5,
+      );
     }
   }
 
