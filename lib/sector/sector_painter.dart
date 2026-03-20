@@ -4,8 +4,13 @@ import 'package:palimpsest/sector/sector.dart';
 class SectorPainter extends CustomPainter {
   final Sector sector;
   final double blockSize;
+  final double blockGap;
 
-  const SectorPainter({required this.sector, required this.blockSize});
+  const SectorPainter({
+    required this.sector,
+    required this.blockSize,
+    this.blockGap = 1.0,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -14,7 +19,13 @@ class SectorPainter extends CustomPainter {
       final height = blockSize;
       final left = (index % sector.columns) * width;
       final top = (index ~/ sector.columns) * height;
-      final rect = Rect.fromLTWH(left, top, width, height);
+      final rect = Rect.fromLTWH(
+        left + blockGap,
+        top + blockGap,
+        width - blockGap,
+        height - blockGap,
+      );
+
       final paint = Paint()..color = sector.cells[index].style.fillColor;
 
       canvas.drawRect(rect, paint);
