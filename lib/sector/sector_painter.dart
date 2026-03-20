@@ -16,16 +16,11 @@ class SectorPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     for (var index = 0; index < sector.cells.length; index++) {
       final block = sector.cells[index];
-      final width = blockSize;
-      final height = blockSize;
-      final left = (index % sector.columns) * width;
-      final top = (index ~/ sector.columns) * height;
-      final rect = Rect.fromLTWH(
-        left + blockGap,
-        top + blockGap,
-        width - (blockGap * 2),
-        height - (blockGap * 2),
-      );
+      final width = blockSize - (blockGap * 2);
+      final height = blockSize - (blockGap * 2);
+      final left = ((index % sector.columns) * blockSize) + blockGap;
+      final top = ((index ~/ sector.columns) * blockSize) + blockGap;
+      final rect = Rect.fromLTWH(left, top, width, height);
 
       final paint = Paint()..color = block.style.fillColor;
 
