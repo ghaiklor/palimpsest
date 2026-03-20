@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
 class PalimpsestTheme {
-  static final Color _inkBlack = Color(0xFF030603);
-  static final Color _phosphorGreen = Color(0xFF00FF41);
+  static const Color _inkBlack = Color(0xFF030603);
+  static const Color _phosphorGreen = Color(0xFF00FF41);
 
   static TextStyle get textStyle {
     return TextStyle();
