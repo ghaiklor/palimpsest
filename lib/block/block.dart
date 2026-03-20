@@ -13,4 +13,8 @@ class Block {
   factory Block.empty() {
     return Block(type: BlockType.empty);
   }
+
+  factory Block.data() {
+    return Block(type: BlockType.data);
+  }
 }
