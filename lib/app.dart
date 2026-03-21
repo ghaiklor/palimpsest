@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:palimpsest/game/game_screen.dart';
 import 'package:palimpsest/themes/palimpsest_theme.dart';
 
 class App extends StatelessWidget {
@@ -6,6 +7,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(theme: PalimpsestTheme.themeData);
+    return CupertinoApp(theme: PalimpsestTheme.themeData, home: GameScreen());
   }
 }
