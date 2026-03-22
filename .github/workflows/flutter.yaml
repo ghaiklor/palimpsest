@@ -15,4 +15,5 @@ jobs:
           channel: stable
           flutter-version-file: pubspec.yaml
       - run: flutter analyze
+      - run: flutter test --coverage --test-randomize-ordering-seed random --reporter github
       - run: flutter build ios --debug --build-number ${{ github.sha }} --no-codesign
