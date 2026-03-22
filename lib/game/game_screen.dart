@@ -8,6 +8,7 @@ class GameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: sector must not be created in the game screen
     final sector = Sector.withWeightedBlocks(50, 30, {
       Block.empty(): 0.4,
       Block.data(): 0.6,
