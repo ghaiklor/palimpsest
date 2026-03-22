@@ -8,6 +8,7 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v6.0.2
       - uses: subosito/flutter-action@v2.22.0
         with:
           channel: stable
