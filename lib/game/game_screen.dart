@@ -17,7 +17,7 @@ class GameScreen extends StatelessWidget {
     return CupertinoPageScaffold(
       child: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Center(child: SectorWidget(sector: sector)),
         ),
       ),
