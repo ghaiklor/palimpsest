@@ -1,0 +1,11 @@
+name: Flutter Build
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - run: flutter analyze
