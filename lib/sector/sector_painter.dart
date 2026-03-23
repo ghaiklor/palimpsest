@@ -3,13 +3,17 @@ import 'package:palimpsest/sector/sector.dart';
 
 class SectorPainter extends CustomPainter {
   final Sector sector;
+
   final double blockSize;
   final double blockGap;
+
+  final double blinkValue;
 
   const SectorPainter({
     required this.sector,
     required this.blockSize,
     this.blockGap = 1.0,
+    this.blinkValue = 0.0,
   });
 
   @override
@@ -30,7 +34,12 @@ class SectorPainter extends CustomPainter {
       final left = ((index % sector.columns) * blockSize) + blockGap;
       final top = ((index ~/ sector.columns) * blockSize) + blockGap;
       final rect = Rect.fromLTWH(left, top, width, height);
-      final paint = fillPaint..color = block.style.fillColor;
+      final paint = fillPaint
+        ..color = Color.lerp(
+          block.style.fillColor,
+          CupertinoColors.white,
+          sector.isDefragmenting() ? blinkValue : 0.0,
+        )!;
 
       canvas.drawRect(rect, paint);
 
@@ -61,8 +70,10 @@ class SectorPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    // TODO: implement logic here to repaint when state changes
-    return false;
+  bool shouldRepaint(SectorPainter oldDelegate) {
+    return oldDelegate.sector != sector ||
+        oldDelegate.blockSize != blockSize ||
+        oldDelegate.blockGap != blockGap ||
+        oldDelegate.blinkValue != blinkValue;
   }
 }
