@@ -1,19 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:palimpsest/block/block.dart';
+import 'package:palimpsest/resources/io_resource.dart';
+import 'package:palimpsest/resources/io_resource_widget.dart';
 import 'package:palimpsest/sector/sector.dart';
 import 'package:palimpsest/sector/sector_widget.dart';
 
-class GameScreen extends StatelessWidget {
+class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
+
+  @override
+  State<GameScreen> createState() => _GameScreenState();
+}
+
+class _GameScreenState extends State<GameScreen> {
+  final Sector sector = Sector.withWeightedBlocks(50, 30, {
+    Block.empty(): 0.4,
+    Block.data(): 0.6,
+  });
+
+  final IOResource _ioResource = IOResource();
 
   @override
   Widget build(BuildContext context) {
     final theme = CupertinoTheme.of(context);
-    // TODO: sector must not be created in the game screen
-    final sector = Sector.withWeightedBlocks(50, 30, {
-      Block.empty(): 0.4,
-      Block.data(): 0.6,
-    });
 
     return CupertinoPageScaffold(
       child: SafeArea(
@@ -25,6 +34,7 @@ class GameScreen extends StatelessWidget {
                 child: SectorWidget(sector: sector),
               ),
             ),
+            IOResourceWidget(resource: _ioResource),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: CupertinoButton(
