@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:palimpsest/block/block.dart';
@@ -21,13 +23,14 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
   });
 
   static const _ioCostPerDefrag = 25.0;
-  static const _ioDefragInterval = 0.3;
   static const _ioIncomeOnDefrag = 10.0;
   final IOResource _ioResource = IOResource();
 
   late Ticker _ticker;
   Duration _tickerLastElapsed = Duration.zero;
-  double _tickerAccumulated = 0;
+
+  final Random _defragTimeDuration = Random();
+  double _defragTimeElapsed = 0;
 
   @override
   void initState() {
@@ -45,14 +48,18 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
   void _onTick(Duration elapsed) {
     final dt = (elapsed - _tickerLastElapsed).inMicroseconds / 1000000.0;
     _tickerLastElapsed = elapsed;
-    _tickerAccumulated += dt;
 
-    if (_tickerAccumulated >= _ioDefragInterval) {
-      _tickerAccumulated = 0.0;
-
+    if (sector.isDefragmenting()) {
+      _defragTimeElapsed += dt;
+      if (_defragTimeElapsed >=
+          (_defragTimeDuration.nextDouble() * 2.0) + 1.0) {
+        _defragTimeElapsed = 0.0;
+        sector.completeDefrag();
+        _ioResource.decrementBy(_ioCostPerDefrag);
+      }
+    } else {
       if (_ioResource.value >= _ioCostPerDefrag) {
-        final moved = sector.defrag();
-        if (moved) _ioResource.decrementBy(_ioCostPerDefrag);
+        sector.startDefrag();
       }
     }
   }
