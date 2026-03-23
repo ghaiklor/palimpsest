@@ -37,9 +37,9 @@ Watch the blocks slowly find their way home.
 
 ## Screenshots
 
-<img width="150" height="1015" alt="Image" src="https://github.com/user-attachments/assets/3498c253-5484-4977-91dc-60bbb7d49254" />
-<img width="150" height="1015" alt="Image" src="https://github.com/user-attachments/assets/37ef4cc0-1c61-480a-a82f-645809d33a6d" />
-<img width="150" height="1015" alt="Image" src="https://github.com/user-attachments/assets/cc5e4096-0c96-4352-9e84-1dddc2c802da" />
+<img width="200" height="1015" alt="Image" src="https://github.com/user-attachments/assets/3498c253-5484-4977-91dc-60bbb7d49254" />
+<img width="200" height="1015" alt="Image" src="https://github.com/user-attachments/assets/37ef4cc0-1c61-480a-a82f-645809d33a6d" />
+<img width="200" height="1015" alt="Image" src="https://github.com/user-attachments/assets/cc5e4096-0c96-4352-9e84-1dddc2c802da" />
 
 ## License
 
