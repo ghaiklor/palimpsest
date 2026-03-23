@@ -17,4 +17,12 @@ class Block {
   factory Block.data() {
     return Block(type: BlockType.data);
   }
+
+  factory Block.writing() {
+    return Block(type: BlockType.writing);
+  }
+
+  factory Block.reading() {
+    return Block(type: BlockType.reading);
+  }
 }

@@ -1,1 +1,1 @@
-enum BlockType { empty, data }
+enum BlockType { empty, data, reading, writing }
