@@ -22,6 +22,7 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
 
   static const _ioCostPerDefrag = 25.0;
   static const _ioDefragInterval = 0.3;
+  static const _ioIncomeOnDefrag = 10.0;
   final IOResource _ioResource = IOResource();
 
   late Ticker _ticker;
@@ -69,7 +70,9 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
               ),
             ),
             IOResourceWidget(resource: _ioResource),
-            DefragButton(),
+            DefragButton(
+              onPressed: () => _ioResource.incrementBy(_ioIncomeOnDefrag),
+            ),
           ],
         ),
       ),
