@@ -12,7 +12,7 @@ class Sector extends ChangeNotifier {
 
   Sector({required this.cells, required this.rows, required this.columns});
 
-  bool defrag() {
+  bool startDefrag() {
     final emptyCellIndex = cells.indexWhere((c) => c.type == BlockType.empty);
     if (emptyCellIndex == -1) return false;
 
@@ -23,11 +23,30 @@ class Sector extends ChangeNotifier {
 
     if (dataCellIndex == -1) return false;
 
-    final temp = cells[emptyCellIndex];
-    cells[emptyCellIndex] = cells[dataCellIndex];
-    cells[dataCellIndex] = temp;
+    cells[emptyCellIndex] = Block.writing();
+    cells[dataCellIndex] = Block.reading();
+
     notifyListeners();
     return true;
+  }
+
+  bool completeDefrag() {
+    final writingIndex = cells.indexWhere((c) => c.type == BlockType.writing);
+    final readingIndex = cells.indexWhere((c) => c.type == BlockType.reading);
+
+    if (writingIndex == -1 || readingIndex == -1) return false;
+
+    cells[writingIndex] = Block.data();
+    cells[readingIndex] = Block.empty();
+
+    notifyListeners();
+    return true;
+  }
+
+  bool isDefragmenting() {
+    return cells.any(
+      (c) => c.type == BlockType.reading || c.type == BlockType.writing,
+    );
   }
 
   factory Sector.withEmptyBlocks(int rows, int columns) {
