@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:palimpsest/block/block.dart';
+import 'package:palimpsest/game/defrag_button.dart';
 import 'package:palimpsest/resources/io_resource.dart';
 import 'package:palimpsest/resources/io_resource_widget.dart';
 import 'package:palimpsest/sector/sector.dart';
@@ -22,8 +23,6 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = CupertinoTheme.of(context);
-
     return CupertinoPageScaffold(
       child: SafeArea(
         child: Column(
@@ -35,34 +34,7 @@ class _GameScreenState extends State<GameScreen> {
               ),
             ),
             IOResourceWidget(resource: _ioResource),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: CupertinoButton(
-                onPressed: () {},
-                padding: EdgeInsets.zero,
-                color: CupertinoColors.transparent,
-                borderRadius: BorderRadius.zero,
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 12.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: const Color(0xFF00FF41).withAlpha(180),
-                      width: 1.0,
-                    ),
-                  ),
-                  child: Text(
-                    'DEFRAG',
-                    textAlign: TextAlign.center,
-                    style: theme.textTheme.textStyle.copyWith(
-                      fontSize: 14.0,
-                      letterSpacing: 4.0,
-                      color: Color(0xFF00FF41),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            DefragButton(),
           ],
         ),
       ),
