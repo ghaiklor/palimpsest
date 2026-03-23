@@ -28,6 +28,7 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
 
   late Ticker _ticker;
   Duration _tickerLastElapsed = Duration.zero;
+  double _blinkValue = 0.0;
 
   final Random _defragTimeDuration = Random();
   double _defragTimeElapsed = 0;
@@ -51,9 +52,15 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
 
     if (sector.isDefragmenting()) {
       _defragTimeElapsed += dt;
+
+      setState(
+        () => _blinkValue = (sin(_defragTimeElapsed / 0.5 * pi * 6) + 1) / 2,
+      );
+
       if (_defragTimeElapsed >=
           (_defragTimeDuration.nextDouble() * 2.0) + 1.0) {
         _defragTimeElapsed = 0.0;
+        _blinkValue = 0.0;
         sector.completeDefrag();
         _ioResource.decrementBy(_ioCostPerDefrag);
       }
@@ -73,7 +80,7 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: SectorWidget(sector: sector),
+                child: SectorWidget(sector: sector, blinkValue: _blinkValue),
               ),
             ),
             IOResourceWidget(resource: _ioResource),

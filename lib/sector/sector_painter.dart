@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:palimpsest/block/block_type.dart';
 import 'package:palimpsest/sector/sector.dart';
 
 class SectorPainter extends CustomPainter {
@@ -34,11 +35,17 @@ class SectorPainter extends CustomPainter {
       final left = ((index % sector.columns) * blockSize) + blockGap;
       final top = ((index ~/ sector.columns) * blockSize) + blockGap;
       final rect = Rect.fromLTWH(left, top, width, height);
+
+      final isReadingBlock = block.type == BlockType.reading;
+      final isWritingBlock = block.type == BlockType.writing;
+      final isBlinking =
+          sector.isDefragmenting() && (isReadingBlock || isWritingBlock);
+
       final paint = fillPaint
         ..color = Color.lerp(
           block.style.fillColor,
           CupertinoColors.white,
-          sector.isDefragmenting() ? blinkValue : 0.0,
+          isBlinking ? blinkValue : 0.0,
         )!;
 
       canvas.drawRect(rect, paint);
