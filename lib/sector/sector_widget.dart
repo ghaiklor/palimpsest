@@ -13,9 +13,14 @@ class SectorWidget extends StatelessWidget {
       builder: (context, constraints) {
         final blockSize = constraints.maxWidth / sector.columns;
 
-        return CustomPaint(
-          size: Size(constraints.maxWidth, constraints.maxHeight),
-          painter: SectorPainter(sector: sector, blockSize: blockSize),
+        return ListenableBuilder(
+          listenable: sector,
+          builder: (context, _) {
+            return CustomPaint(
+              size: Size(constraints.maxWidth, constraints.maxHeight),
+              painter: SectorPainter(sector: sector, blockSize: blockSize),
+            );
+          },
         );
       },
     );
